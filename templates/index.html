@@ -1,12 +1,8 @@
-{% extends 'layout.html' %}
+{% extends "base.html" %}
 
-
-{% block head %}
-<h1>TEMPLATE BISHsss</h1>
-{% endblock %}
-
-
-
-{% block body %}
-
+{% block content %}
+    <h1>Hi, {{ user.username }}!</h1>
+    {% for post in posts %}
+    <div><p>{{ post.author.username }} says: <b>{{ post.body }}</b></p></div>
+    {% endfor %}
 {% endblock %}
