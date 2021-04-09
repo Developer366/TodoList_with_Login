@@ -1,14 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends "base.html" %}
 
-    <head>
-        <meta charset="UTF-8">
-        <title>Registration Form</title>
-    </head>
-
-    <body>
-        <h1>Register</h1>
-        <form action="" method="post">
+{% block content %}
+        <h1>Register an Account</h1>
+        <form action="" method="post" novalidate>
             {{ form.hidden_tag() }}
             <p>
                 {{ form.username.label }}<br>
@@ -41,6 +35,5 @@
             <p>{{ form.submit() }}</p>
         </form>
 
+{% endblock %}
 
-    </body>
-</html>

@@ -18,3 +18,23 @@ ImportError: cannot import name 'url_encode' from 'werkzeug'
 https://github.com/scoringengine/scoringengine/issues/670
 
 CIRCULAR IMPORT ERROR 
+
+Need to learn FLASK MIGRATION
+
+Building todo web app from scratch https://www.youtube.com/watch?v=Z1RJmh_OqeA&ab_channel=NDCConferences
+
+https://www.youtube.com/watch?v=hbDRTZarMUw&ab_channel=Codemy.com
+https://www.youtube.com/watch?v=juPQ04_twtA&ab_channel=PrettyPrinted
+
+
+
+
+instructions:
+
+flask db init (creates the databse migration folder)
+
+flask db migrate -m "users table" (makes a migration based on your table changes)
+
+"snake case" = AddressAndPhone model class becomes address_and_phone
+
+https://www.google.com/search?q=how+to+delete+column+in+flask+databse&oq=how+to+delete+column+in+flask+databse&aqs=chrome..69i57j33i10i160l4.6538j1j7&sourceid=chrome&ie=UTF-8#kpvalbx=_t7FwYJj7J_DD_Qb-sInoCw12
