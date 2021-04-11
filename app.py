@@ -22,22 +22,22 @@ login_manager.init_app(app)
 def load_user(user_id):
     return User.query.get(int(user_id))
 
-#routes-----------------------------------------------------------------------------------------------------------
-##login route
-@app.route('/', methods=['GET', 'POST'])
+#routes-----------------------------------------------------------------------------------------------------------------
+
+@app.route('/', methods=['GET', 'POST']) #login route
 def login():
-    form = LoginForm()
+
     if current_user.is_authenticated:
-        #now = datetime.datetime.now()
         return redirect(url_for('task'))
+    form = LoginForm()
     if form.validate_on_submit():
         user = User.query.filter_by(username=form.username.data).first()
-        login_user(user)
-        
         if user is None or not user.check_password(form.password.data):
             flash('Invalid Username or Password')
             return redirect(url_for('login'))
-    return render_template('login.html', title='Login In ', form=form)
+        login_user(user)
+        return redirect(url_for('task'))
+    return render_template('login.html', title='Log In ', form=form)
 
 @app.route('/register', methods=['GET', "POST"])
 def register():
@@ -63,32 +63,64 @@ def logout():
 @login_required
 def task():
 
+    tasks = db.session.query(Task).filter_by(user_id=current_user.id).filter_by(completed='0').all()
+    #tasks = db.session.query(Task).filter_by(completed='False')
+    completed = db.session.query(Task).filter_by(user_id=current_user.id).filter_by(completed='1').all()
+
+    return render_template('Task.html', tasks=tasks, completed=completed, title='List of Tasks')
+
+@app.route('/add', methods=['GET', 'POST'])
+def add():
     if request.method == "POST":
         new_task = request.form['task']
         now = datetime.now()
-        add_task = Task(task=new_task, datacreated=now)
+        add_task = Task(task=new_task, date_created=now, completed=False, user_id=current_user.id)
 
         try:
-
-            return redirect('/task')
+            db.session.add(add_task)
+            db.session.commit()
+            return redirect(url_for('task'))
         except:
-            flash('There was an error adding your Task!')
+            return 'There was an issue with adding your task =['
 
     else:
-        added_tasks = db.session.query(Task).all()
-        return render_template('Task.html', added_tasks=added_tasks, title='List of Tasks')
+        tasks = db.session.query(Task).all()
+        return render_template('Task.html', tasks=tasks)
 
-@app.route('/add', methods=['POST'])
-def add():
-    new_task = request.form['task']
+
+@app.route('/delete/<int:id>', methods=['GET','POST'])
+def delete(id):
+    task_to_delete = Task.query.get_or_404(id)
+
+    try:
+        db.session.delete(task_to_delete)
+        db.session.commit()
+        return redirect('/task')
+    except:
+        return "There was a problem deleting task"
+
+@app.route('/completed/<int:id>', methods=['GET', 'POST'])
+def complete(id):
+    task_to_complete = Task.query.get_or_404(id)
+    #num_rows_updated = Task.query.filter_by(completed='0').update(Task(completed='1'))
     now = datetime.now()
-    add_task = Task(task=new_task, datacreated=now)
-    db.session.add(add_task)
-    db.session.commit()
-    return redirect(url_for('task'))
 
-#database Models--------------------------------------------------------------------------------------------------
+    try:
+        task_to_complete.completed = True
+        task_to_complete.date_completed = now
+        #task_to_complete['completed'] = '1'
+        #task_to_complete.update(Task.completed)
+        #db.session.update()
+        db.session.commit()
+        return redirect('/task')
+    except:
+        return "There was a problem with completing your task :["
+    
+    #return render_template("Task.html", task_to_completed= task_to_completed)
+
+#database Models--------------------------------------------------------------------------------------------------------
 class User(UserMixin, db.Model):
+#tablename= user
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(40), index=True, unique=True)
     email = db.Column(db.String(64), index=True, unique=True, nullable=False)
@@ -106,17 +138,19 @@ class User(UserMixin, db.Model):
         return '<User {}>'.format(self.username)
 
 class Task(db.Model):
+#tablename = task
     id = db.Column(db.Integer, primary_key=True)
     task = db.Column(db.String(250), nullable=False)
     completed = db.Column(db.Boolean, default=False)
-    date_created = db.Column(db.DateTime, index=True, default=datetime.utcnow())
+    date_created = db.Column(db.DateTime, index=True, default=datetime.now())
+    date_completed = db.Column(db.DateTime, index=True, default=datetime.now())
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 
     def __repr__(self):
         return '<Task %r>' % self.id
 
 
-#forms------------------------------------------------------------------------------------------------------------
+#forms------------------------------------------------------------------------------------------------------------------
 class LoginForm(FlaskForm):
     username = StringField('Username:', validators=[InputRequired(), Length(min=4, max=16)])
     password = PasswordField('Password:', validators=[InputRequired(), Length(min=6, max=20)])
