@@ -25,16 +25,19 @@ def load_user(user_id):
 #routes-----------------------------------------------------------------------------------------------------------------
 
 @app.route('/', methods=['GET', 'POST']) #login route
+@app.route('/login', methods=['GET', 'POST'])
 def login():
-
+    #flash('Hello Fool')
     if current_user.is_authenticated:
         return redirect(url_for('task'))
+
     form = LoginForm()
     if form.validate_on_submit():
         user = User.query.filter_by(username=form.username.data).first()
         if user is None or not user.check_password(form.password.data):
             flash('Invalid Username or Password')
             return redirect(url_for('login'))
+
         login_user(user)
         return redirect(url_for('task'))
     return render_template('login.html', title='Log In ', form=form)
@@ -149,7 +152,6 @@ class Task(db.Model):
     def __repr__(self):
         return '<Task %r>' % self.id
 
-
 #forms------------------------------------------------------------------------------------------------------------------
 class LoginForm(FlaskForm):
     username = StringField('Username:', validators=[InputRequired(), Length(min=4, max=16)])
@@ -158,9 +160,9 @@ class LoginForm(FlaskForm):
     submit = SubmitField('Log In')
 
 class RegistrationForm(FlaskForm):
-    username = StringField('Username:', validators=[InputRequired(), Length(min=4, max=15)])
+    username = StringField('Username:', validators=[InputRequired(), Length(min=4, max=16)])
     email = StringField('Email:', validators=[InputRequired(), Email(message='Invalid email'), Length(max=50)])
-    password = PasswordField('Password:', validators=[InputRequired(), Length(min=8, max=20)])
+    password = PasswordField('Password:', validators=[InputRequired(), Length(min=6, max=20)])
     password2 = PasswordField('Confirm Password:', validators=[DataRequired(), EqualTo('password')])
     submit = SubmitField('Register')
 

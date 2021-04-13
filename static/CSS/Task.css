@@ -1,0 +1,19 @@
+body {
+    background-color: darkorange;
+}
+#logout {
+    /*
+        display: inline-block;
+        justify-content: right;
+    */
+    float: right;
+}
+h1 {
+    color: green;
+}
+table, th, td {
+    border: 1px solid black;
+}
+#task {
+    width: 40%;
+}
