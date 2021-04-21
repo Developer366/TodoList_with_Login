@@ -1,0 +1,75 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="../static/CSS/Task.css">
+      {% if title %}
+      <title>{{ title }} - Task Tracker</title>
+      {% else %}
+      <title>Welcome to Task Tracker</title>
+      {% endif %}
+    </head>
+
+
+    <body>
+        <div> Task Tracker Web App ---- [ {{ title }} Page ]
+            <a id="logout" href="/logout">Logout</a>
+        </div>
+        <hr>
+        <h1>Welcome, {{ current_user.username }} </h1> <br>
+        <h1>Enter a new Task to be Completed:</h1>
+
+    <!-- Form to add a new task to user -->
+        <div>
+            <form action="/add" method="POST">
+                <input type="text" placeholder="task" name="task" id="task">
+                <input type="submit" value="Add Task">
+            </form>
+        </div>
+
+    <!-- List of uncompleted Tasks -->
+
+        <h1>Tasks in Progress:</h1>
+        <table>
+            <tr>
+                <th>Task</th>
+                <th>Date Created</th>
+                <th>Complete</th>
+                <th>Delete</th>
+            </tr>
+
+            {% for task in tasks %}
+            <tr>
+                <td>{{ task.task }}</td>
+                <td>{{ task.date_created }}</td>
+                <td><a href="/completed/{{ task.id }}">completed</a></td>
+                <td><a href="/delete/{{ task.id }}">delete</a></td>
+                {% endfor %}
+            <tr>
+        </table>
+        <br>
+
+    <!-- List of completed Tasks -->
+        <div>
+            <h1>Tasks Completed:</h1>
+            <table>
+            <tr>
+                <th>Task</th>
+                <th>Date Created</th>
+                <th>Date Completed</th>
+                <th>Delete</th>
+            </tr>
+
+            {% for task in completed %}
+            <tr>
+                <td>{{ task.task }}</td>
+                <td>{{ task.date_created }}</td>
+                <td>{{ task.date_completed }}</td>
+                <td> <a href="/delete/{{ task.id }}">delete</a></td>
+                {% endfor %}
+            <tr>
+        </table>
+        </div>
+
+    </body>
+</html>
+
+
