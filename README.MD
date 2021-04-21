@@ -40,3 +40,7 @@ flask db migrate -m "users table" (makes a migration based on your table changes
 https://www.google.com/search?q=how+to+delete+column+in+flask+databse&oq=how+to+delete+column+in+flask+databse&aqs=chrome..69i57j33i10i160l4.6538j1j7&sourceid=chrome&ie=UTF-8#kpvalbx=_t7FwYJj7J_DD_Qb-sInoCw12
 
 https://www.youtube.com/watch?v=dam0GPOAvVI&ab_channel=TechWithTim
+
+Procfile  = File containing setting for the editor
+
+https://www.youtube.com/watch?v=Gjf0PxhGU0U&t=19s&ab_channel=ASATechnical

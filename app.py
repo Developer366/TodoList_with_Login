@@ -73,6 +73,7 @@ def task():
     return render_template('Task.html', tasks=tasks, completed=completed, title='List of Tasks')
 
 @app.route('/add', methods=['GET', 'POST'])
+@login_required
 def add():
     if request.method == "POST":
         new_task = request.form['task']
@@ -92,6 +93,7 @@ def add():
 
 
 @app.route('/delete/<int:id>', methods=['GET','POST'])
+@login_required
 def delete(id):
     task_to_delete = Task.query.get_or_404(id)
 
@@ -103,6 +105,7 @@ def delete(id):
         return "There was a problem deleting task"
 
 @app.route('/completed/<int:id>', methods=['GET', 'POST'])
+@login_required
 def complete(id):
     task_to_complete = Task.query.get_or_404(id)
     #num_rows_updated = Task.query.filter_by(completed='0').update(Task(completed='1'))
