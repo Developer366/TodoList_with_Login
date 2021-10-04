@@ -9,24 +9,27 @@
     </head>
 
 
-    <body>
-        <div> Task Tracker Web App ---- [ {{ title }} Page ]
-            <a id="logout" href="/logout">Logout</a>
-        </div>
+<body>
+
+        <h1 id="Nav"> Task Tracker Web App ---- [ {{ title }} Page ] </h1>
+        <a id="logout" href="/logout">Logout</a>
+
         <hr>
-        <h1>Welcome, {{ current_user.username }} </h1> <br>
-        <h1>Enter a new Task to be Completed:</h1>
+        <h2>Welcome, {{ current_user.username }} </h2> <br>
+
 
     <!-- Form to add a new task to user -->
-        <div>
-            <form action="/add" method="POST">
-                <input type="text" placeholder="task" name="task" id="task">
-                <input type="submit" value="Add Task">
-            </form>
-        </div>
+    <div id="newTask">
+        <h1>Enter a new Task to be Completed:</h1>
+        <form action="/add" method="POST">
+            <input type="text" placeholder="task" name="task" id="task">
+            <input type="submit" value="Add Task">
+        </form>
+    </div>
+    <br><br>
 
     <!-- List of uncompleted Tasks -->
-
+    <div id="NotComp">
         <h1>Tasks in Progress:</h1>
         <table>
             <tr>
@@ -46,11 +49,12 @@
             <tr>
         </table>
         <br>
-
+    </div>
+    <br><br>
     <!-- List of completed Tasks -->
-        <div>
-            <h1>Tasks Completed:</h1>
-            <table>
+    <div id="Comp">
+        <h1>Tasks Completed:</h1>
+        <table>
             <tr>
                 <th>Task</th>
                 <th>Date Created</th>
@@ -67,9 +71,9 @@
                 {% endfor %}
             <tr>
         </table>
-        </div>
+    </div>
 
-    </body>
+</body>
 </html>
 
 

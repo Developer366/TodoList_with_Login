@@ -1,3 +1,14 @@
 body {
-    background-color: darkorange;
+    background-color: cyan;
+}
+
+#myForm {
+    background-color:white;
+    margin: auto;
+    text-align: center;
+    width: 40%;
+    padding: 30px;
+    border-radius: 30px;
+    border: 5px solid blue;
+
 }

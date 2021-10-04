@@ -1,19 +1,67 @@
 body {
-    background-color: darkorange;
+    background-color: Gold;
 }
+
 #logout {
-    /*
-        display: inline-block;
-        justify-content: right;
-    */
+    display: inline;
     float: right;
+    font-size: 30px;
 }
+
+#Nav {
+    display: inline;
+}
+
 h1 {
-    color: green;
+    color: Cyan;
+
 }
+h2 {
+    text-align:center;
+
+    font-size: 3rem;
+}
+
 table, th, td {
-    border: 1px solid black;
+    border: 1px solid blue;
 }
+
+table {
+    margin-left: auto;
+    margin-right: auto;
+}
+
 #task {
     width: 40%;
 }
+
+#newTask {
+    background-color: HoneyDew;
+    border: 5px solid blue;
+    border-radius: 30px;
+    margin:auto;
+    padding: 30px;
+    width: 70%;
+    text-align:center;
+}
+#NotComp {
+    margin-top: 50px;
+    background-color: HoneyDew;
+    border: 5px solid blue;
+    border-radius: 30px;
+    margin:auto;
+    padding: 20px;
+    width: 80%;
+    text-align:center;
+}
+#Comp {
+    margin-top: 50px;
+    background-color: HoneyDew;
+    border: 5px solid blue;
+    border-radius: 30px;
+    margin:auto;
+    padding: 20px;
+    width: 80%;
+    text-align:center;
+}
+
