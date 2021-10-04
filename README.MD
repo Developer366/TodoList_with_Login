@@ -1,7 +1,7 @@
-#Todo App with Login/Register using Python,Flask, and SQLite
+# Todo App with Login/Register using Python,Flask, and SQLite
 
 ---
-##Sample Account to login with:
+## Sample Account to login with:
 Username: TheBestUser1
 
 Password: password1234
@@ -9,7 +9,7 @@ Password: password1234
 ---
 
 
-##REFERENCES/LINKS:
+## REFERENCES/LINKS:
 
 [SQLITE]
 https://www.youtube.com/watch?v=jTiyt6W1Qpo&ab_channel=PrettyPrinted
@@ -34,7 +34,7 @@ https://www.youtube.com/watch?v=Gjf0PxhGU0U&t=19s&ab_channel=ASATechnical
 https://www.youtube.com/watch?v=Li0Abz-KT78&ab_channel=Codemy.com
 
 
-##Errors and Tricks
+## Errors and Tricks
 
 No timer error with flask_sqlalchemy: just change if 
 
@@ -44,16 +44,16 @@ __version__ = '0.14.2'
 ImportError: cannot import name 'url_encode' from 'werkzeug'
 
 ---
-#Instructions:
+# Instructions:
 
-###flask db init (creates the database migration folder)
+### flask db init (creates the database migration folder)
 
-###flask db migrate -m "users table" (makes a migration based on your table changes)
+### flask db migrate -m "users table" (makes a migration based on your table changes)
 
-###"snake case" = AddressAndPhone model class becomes address_and_phone
+### "snake case" = AddressAndPhone model class becomes address_and_phone
 
-###Procfile  = File containing setting for the editor
+### Procfile  = File containing setting for the editor
 
-###ctrl + shift + R = restet the css
+### ctrl + shift + R = restet the css
 
-###set FLASK_ENV=development
+### set FLASK_ENV=development
